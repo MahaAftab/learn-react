@@ -1,18 +1,11 @@
 import React, { useState } from "react";
 import "./SearchBar.css"
-
-const products = [
-    "tooth paste",
-    "tooth brush",
-    "mouth wash",
-    "dental floss",
-    "mouth guard"
-]
+import '../App'
     
 
-const SearchBar = () => {
+const SearchBar = (props) => {
 
-    const [searchValue, setSearchValue] = useState("Pret ")
+    const [searchValue, setSearchValue] = useState("Pret")
     //above is a piece of state
     const handleChange = (event) => {
         setSearchValue(event.target.value)
@@ -24,19 +17,19 @@ const SearchBar = () => {
     const shouldDisplayBtn = searchValue.length > 0
     // alert(shouldDisplayBtn)
 
-    console.log(
-        products.map((product)=>{
-            return product.toUpperCase()
-        }
-    ))
-    const person = {
-        name: 'Maha'
-    }
-    const newPerson = {
-        ...person,
-        age: 28
-    }
-    console.log(newPerson)
+
+    // const person = {
+    //     name: 'Maha'
+    // }
+    // const newPerson = {
+    //     ...person,
+    //     age: 28
+    // }
+    // console.log(newPerson)
+    const filteredProduct = props.searchItems.filter((product) =>{
+            return product.includes(searchValue);
+        })
+    
 
     return (
         <div>
@@ -48,6 +41,14 @@ const SearchBar = () => {
 
             <br/>
             {searchValue}
+            <ul>
+            {/* key is used in react in order to ientify the item on the list */}
+            {filteredProduct.map((product)=>{
+            return <li key={product}>{product}</li>
+            })
+        }
+            </ul>
+           {/* USING FILTER FUNCTION */}
             
 
         </div>
